@@ -11,9 +11,15 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rigid;
 
+    //스피드 조정 변수
     [SerializeField] private float walkSpeed;
+    [SerializeField] private float runSpeed;
+    private float applySpeed;
 
+    // 상태 변수
+    private bool isRun = false;
 
+    [Header("Camera")]
     [SerializeField] private float lookSensitivity;     //카메라의 민감도
     [SerializeField] private float cameraRotationLimit; //카메라 각도 제한
     private float currentCameraRotationX = 0;
@@ -27,16 +33,40 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        applySpeed = walkSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        TryRun();
         Move();
         CameraRotation();
         CharacterRotation();
-        
+
+    }
+    private void TryRun()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            Running();
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            RunningCancel();
+        }
+    }
+
+    private void Running()
+    {
+        isRun = true;
+        applySpeed = runSpeed;
+    }
+
+    private void RunningCancel()
+    {
+        isRun = false;
+        applySpeed = walkSpeed;
     }
 
     private void Move()
@@ -47,11 +77,12 @@ public class PlayerController : MonoBehaviour
         Vector3 _moveH = transform.right * _h;
         Vector3 _moveV = transform.forward * _v;
 
-        Vector3 _velocityVec = (_moveH + _moveV).normalized * walkSpeed;
+        Vector3 _velocityVec = (_moveH + _moveV).normalized * applySpeed;
 
         rigid.MovePosition(transform.position + _velocityVec * Time.deltaTime);
 
     }
+
 
     private void CameraRotation()
     {
