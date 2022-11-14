@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
@@ -10,15 +11,27 @@ public class PlayerController : MonoBehaviour
 {
 
     private Rigidbody rigid;
+    private CapsuleCollider capsuleCollider;   
 
     //스피드 조정 변수
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
+    [SerializeField] private float crouchSpeed;
     private float applySpeed;
+
+    //점프 변수
+    [SerializeField] private float jumpForce; 
 
     // 상태 변수
     private bool isRun = false;
+    private bool isGround = true;
+    private bool isCrouch = false;
 
+    //앉았을 때 얼마나 앉았을지 결정하는 변수
+    [SerializeField] private float crouchPosY;
+    private float originPosY;
+    private float applyCrouchPosY;
+    
     [Header("Camera")]
     [SerializeField] private float lookSensitivity;     //카메라의 민감도
     [SerializeField] private float cameraRotationLimit; //카메라 각도 제한
@@ -27,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        capsuleCollider = GetComponent<CapsuleCollider>();
         rigid = GetComponent<Rigidbody>();
     }
 
@@ -34,17 +48,42 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         applySpeed = walkSpeed;
+        originPosY = _camera. transform.localPosition.y;
+        applyCrouchPosY = originPosY;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        IsGround();
+        TryJump();
         TryRun();
+        TryCrouch();
         Move();
         CameraRotation();
         CharacterRotation();
 
     }
+
+    private void IsGround()
+    {
+        isGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f);
+    }
+
+    private void TryJump()
+    {
+        if(Input.GetKeyDown(KeyCode.Space) && isGround)
+        {
+            Jump();
+        }
+    }
+
+    private void Jump()
+    {
+        rigid.velocity = transform.up * jumpForce;
+    }
+
     private void TryRun()
     {
         if (Input.GetKey(KeyCode.LeftShift))
@@ -69,6 +108,46 @@ public class PlayerController : MonoBehaviour
         applySpeed = walkSpeed;
     }
 
+    private void TryCrouch()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            Crouch();
+        }
+    }
+
+    private void Crouch()
+    {
+        isCrouch = !isCrouch;
+
+        if (isCrouch)
+        {
+            applySpeed = crouchSpeed;
+            applyCrouchPosY = crouchPosY;
+        }
+        else
+        {
+            applySpeed = walkSpeed;
+            applyCrouchPosY = originPosY;
+        }
+
+        _camera.transform.localPosition = new Vector3(_camera.transform.localPosition.x, applyCrouchPosY, _camera.transform.localPosition.z);
+    }
+
+    IEnumerator CrouchCoroutine()
+    {
+
+        float _posY = _camera.transform.localPosition.y;
+
+        while (_posY != applyCrouchPosY)
+        {
+            
+        }
+
+        yield return new WaitForSeconds(1f);
+
+    }
+        
     private void Move()
     {
         float _h = Input.GetAxisRaw("Horizontal");
