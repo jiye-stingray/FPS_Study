@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         applySpeed = walkSpeed;
+
+        //초기화
         originPosY = _camera. transform.localPosition.y;
         applyCrouchPosY = originPosY;
     }
@@ -81,6 +83,9 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        //앉은 상태에서 점프 시 해제
+        if (isCrouch)      
+            Crouch();       
         rigid.velocity = transform.up * jumpForce;
     }
 
@@ -98,6 +103,10 @@ public class PlayerController : MonoBehaviour
 
     private void Running()
     {
+        //앉은 상태에서 점프 시 해제
+        if (isCrouch)
+            Crouch();
+
         isRun = true;
         applySpeed = runSpeed;
     }
@@ -108,6 +117,9 @@ public class PlayerController : MonoBehaviour
         applySpeed = walkSpeed;
     }
 
+    /// <summary>
+    /// 앉기 시도
+    /// </summary>
     private void TryCrouch()
     {
         if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -116,6 +128,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 앉기 동작
+    /// </summary>
     private void Crouch()
     {
         isCrouch = !isCrouch;
@@ -130,19 +145,33 @@ public class PlayerController : MonoBehaviour
             applySpeed = walkSpeed;
             applyCrouchPosY = originPosY;
         }
-
-        _camera.transform.localPosition = new Vector3(_camera.transform.localPosition.x, applyCrouchPosY, _camera.transform.localPosition.z);
+        StartCoroutine(CrouchCoroutine());
     }
 
+    /// <summary>
+    /// 부드러운 앉기 동작 실행
+    /// </summary>
+    /// <returns></returns>
     IEnumerator CrouchCoroutine()
     {
-
         float _posY = _camera.transform.localPosition.y;
+
+        int count = 0;
 
         while (_posY != applyCrouchPosY)
         {
-            
+            count++;
+            _posY = Mathf.Lerp(_posY, applyCrouchPosY, 0.3f);       //보간
+            _camera.transform.localPosition = new Vector3(0,_posY,0 );
+
+            if (count > 15)
+                break;
+
+            yield return null;      //1프레임 마다
         }
+
+        _camera.transform.localPosition = new Vector3(0f, applyCrouchPosY, 0f);     //보간 후 position 맞추기
+
 
         yield return new WaitForSeconds(1f);
 

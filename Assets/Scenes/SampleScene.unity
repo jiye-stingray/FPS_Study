@@ -516,9 +516,8 @@ MonoBehaviour:
   runSpeed: 10
   crouchSpeed: 3
   jumpForce: 5
-  isCrouch: 0
   crouchPosY: 0
-  lookSensitivity: 2
+  lookSensitivity: 1
   cameraRotationLimit: 45
   _camera: {fileID: 963194227}
 --- !u!54 &1196509749
