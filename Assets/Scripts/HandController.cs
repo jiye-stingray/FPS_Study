@@ -57,7 +57,7 @@ public class HandController : MonoBehaviour
         {
             if (CheckObject())
             {
-                isSwing = false;
+                isSwing = false; 
                 //Ãæµ¹ µÊ
                 Debug.Log(hitInfo.transform.name);
 
