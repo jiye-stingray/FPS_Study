@@ -26,5 +26,5 @@ public class Gun : MonoBehaviour
     public ParticleSystem muzzleFlesh;
 
     public AudioClip fire_Sound;
-
+ 
 }
