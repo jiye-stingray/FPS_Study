@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GunController : MonoBehaviour
@@ -8,10 +9,12 @@ public class GunController : MonoBehaviour
 
     private float currentFireRate;
 
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -44,7 +47,14 @@ public class GunController : MonoBehaviour
 
     private void Shoot()
     {
-        currentGun.muzzleFlesh.Play();
+        PlaySE(currentGun.fire_Sound); 
+        currentGun.muzzleFlesh.Play(); 
         Debug.Log("ÃÑ¾Ë ¹ß»çÇÔ");
+    }
+
+    private void PlaySE(AudioClip _clip)
+    {
+        audioSource.clip = _clip;
+        audioSource.Play();
     }
 }
