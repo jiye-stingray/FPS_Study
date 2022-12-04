@@ -44,6 +44,7 @@ public class GunController : MonoBehaviour
 
     private void Shoot()
     {
+        currentGun.muzzleFlesh.Play();
         Debug.Log("총알 발사함");
     }
 }
