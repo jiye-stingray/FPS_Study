@@ -32,24 +32,52 @@ public class GunController : MonoBehaviour
 
     private void TryFire()
     {
-        if (Input.GetButton("Fire1") && currentFireRate <= 0)
+
+        if (Input.GetMouseButtonDown(0) && currentFireRate <= 0)
         {
+            Debug.Log("Try");
             Fire();
         }
     }
 
     private void Fire()
     {
-        currentFireRate = currentGun.fireRate;
 
-        Shoot();
+        if (currentGun.currentBulletCount > 0)
+        {
+            Shoot();
+        }
+        else
+        {
+            Reload();
+        }
     }
 
     private void Shoot()
     {
+        currentGun.currentBulletCount--;
+        currentFireRate = currentGun.fireRate;      //연사 속도 재계산
         PlaySE(currentGun.fire_Sound); 
         currentGun.muzzleFlesh.Play(); 
-        Debug.Log("총알 발사함");
+    }
+
+    private void Reload()
+    {
+        if(currentGun.carryBulletCount > 0)
+        {
+            currentGun.anim.SetTrigger("Reload");
+
+            if(currentGun.carryBulletCount >= currentGun.reloadBulletCount)
+            {
+                currentGun.currentBulletCount = currentGun.reloadBulletCount;
+                currentGun.carryBulletCount -= currentGun.reloadBulletCount;
+            }
+            else
+            {
+                currentGun.currentBulletCount = currentGun.carryBulletCount;
+                currentGun.carryBulletCount = 0;    
+            }
+        }
     }
 
     private void PlaySE(AudioClip _clip)
