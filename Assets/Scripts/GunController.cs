@@ -25,6 +25,7 @@ public class GunController : MonoBehaviour
     {
         GunFireRateCalc();
         TryFire();
+        TryReload();
     }
 
     private void GunFireRateCalc()
@@ -63,6 +64,14 @@ public class GunController : MonoBehaviour
         currentFireRate = currentGun.fireRate;      //연사 속도 재계산
         PlaySE(currentGun.fire_Sound); 
         currentGun.muzzleFlesh.Play(); 
+    }
+
+    private void TryReload()
+    {
+        if (Input.GetKeyDown(KeyCode.R) && !isReload && currentGun.currentBulletCount < currentGun.reloadBulletCount)
+        {
+            StartCoroutine(ReloadCoroutine());
+        }
     }
 
     IEnumerator ReloadCoroutine()
