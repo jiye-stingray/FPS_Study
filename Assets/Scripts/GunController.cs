@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class GunController : MonoBehaviour
     [SerializeField] private Gun currentGun;
 
     private float currentFireRate;
+
+    private bool isReload = false;
 
     private AudioSource audioSource;
 
@@ -33,7 +36,7 @@ public class GunController : MonoBehaviour
     private void TryFire()
     {
 
-        if (Input.GetMouseButtonDown(0) && currentFireRate <= 0)
+        if (Input.GetMouseButtonDown(0) && currentFireRate <= 0 && !isReload)
         {
             Debug.Log("Try");
             Fire();
@@ -42,6 +45,7 @@ public class GunController : MonoBehaviour
 
     private void Fire()
     {
+        if (isReload) return;
 
         if (currentGun.currentBulletCount > 0)
         {
@@ -49,7 +53,7 @@ public class GunController : MonoBehaviour
         }
         else
         {
-            Reload();
+            StartCoroutine(ReloadCoroutine());
         }
     }
 
@@ -61,11 +65,17 @@ public class GunController : MonoBehaviour
         currentGun.muzzleFlesh.Play(); 
     }
 
-    private void Reload()
+    IEnumerator ReloadCoroutine()
     {
         if(currentGun.carryBulletCount > 0)
         {
+            isReload = true;
             currentGun.anim.SetTrigger("Reload");
+
+            currentGun.carryBulletCount +=  currentGun.currentBulletCount;
+            currentGun.currentBulletCount = 0;
+
+            yield return new WaitForSeconds(currentGun.reloadTime);
 
             if(currentGun.carryBulletCount >= currentGun.reloadBulletCount)
             {
@@ -77,6 +87,8 @@ public class GunController : MonoBehaviour
                 currentGun.currentBulletCount = currentGun.carryBulletCount;
                 currentGun.carryBulletCount = 0;    
             }
+
+            isReload = false;
         }
     }
 
