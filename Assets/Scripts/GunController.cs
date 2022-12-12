@@ -99,6 +99,10 @@ public class GunController : MonoBehaviour
 
             isReload = false;
         }
+        else
+        {
+            Debug.Log("소유한 총알이 없습니다");
+        }
     }
 
     private void PlaySE(AudioClip _clip)
