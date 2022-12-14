@@ -27,6 +27,9 @@ ModelImporter:
   - first:
       74: 7276754366007499447
     second: Gun0_Item
+  - first:
+      74: 1061965846255265685
+    second: Gun0_FineSight (1)
   externalObjects: {}
   materials:
     materialImportMode: 2
