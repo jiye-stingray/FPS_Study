@@ -125,11 +125,11 @@ public class GunController : MonoBehaviour
 
         if (isfineSightMode)
         {
-
+            StartCoroutine(FineSightActivateCoroutine());
         }
         else
         {
-
+            StartCoroutine(FineSightDeActivateCoroutine());
         }
     }
 
@@ -137,8 +137,17 @@ public class GunController : MonoBehaviour
     {
         while (currentGun.transform.localPosition != currentGun.fineSightOriginPos)
         {
-            currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, 
-                currentGun.fineSightOriginPos);
+            currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, currentGun.fineSightOriginPos,0.2f);
+            yield return null;
+        }
+    }
+
+    IEnumerator FineSightDeActivateCoroutine()
+    {
+        while (currentGun.transform.localPosition != originPos)
+        {
+            currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, originPos, 0.2f);
+            yield return null;
         }
     }
 
