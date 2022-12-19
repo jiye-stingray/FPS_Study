@@ -67,7 +67,11 @@ public class GunController : MonoBehaviour
         currentGun.currentBulletCount--;
         currentFireRate = currentGun.fireRate;      //연사 속도 재계산
         PlaySE(currentGun.fire_Sound); 
-        currentGun.muzzleFlesh.Play(); 
+        currentGun.muzzleFlesh.Play();
+
+        //총기 반동 코루틴 실행
+
+        Debug.Log("총알 발사함");
     }
 
     private void TryReload()
@@ -125,16 +129,21 @@ public class GunController : MonoBehaviour
 
         if (isfineSightMode)
         {
+            StopAllCoroutines();
             StartCoroutine(FineSightActivateCoroutine());
         }
         else
         {
+            StopAllCoroutines();
             StartCoroutine(FineSightDeActivateCoroutine());
         }
     }
 
     IEnumerator FineSightActivateCoroutine()
     {
+        //Lerp 문을 사용할 때는 position 값이 딱 맞아 떨어지지 않아서 
+        // 아래 while 문 조건을 통과하지 않는다. (코루틴이 무한으로 작동)
+        // 따라서 위 코루틴을 실행할 때 다른 코루틴들을 종료 해줘야 한다.
         while (currentGun.transform.localPosition != currentGun.fineSightOriginPos)
         {
             currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, currentGun.fineSightOriginPos,0.2f);
