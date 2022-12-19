@@ -151,6 +151,36 @@ public class GunController : MonoBehaviour
         }
     }
 
+    IEnumerator RetroActionCoroutine()
+    {
+        Vector3 recoilBack = new Vector3(currentGun.retroActionForce, originPos.y, originPos.z);
+        Vector3 retroActionRecoilBack = new Vector3(currentGun.retroActionFineSightForce, currentGun.fineSightOriginPos.y, currentGun.fineSightOriginPos.z);
+
+        if (!isfineSightMode)
+        {
+            //정조준 위치일때 반동은 큰 차이가 없으므로 원래 위치로 돌려놓고 반동을 실행
+            currentGun.transform.localPosition = originPos;
+
+            //반동 시작
+            while (currentGun.transform.localPosition.x  <= currentGun.retroActionForce - 0.02f)
+            {
+                currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, recoilBack, 0.4f);
+
+                yield return null;
+            }
+
+            // 원위치
+            while (currentGun.transform.localPosition != originPos)
+            {
+                currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, originPos, 0.1f);
+            }
+        }
+        else
+        {
+
+        }
+    }
+
     private void PlaySE(AudioClip _clip)
     {
         audioSource.clip = _clip;
