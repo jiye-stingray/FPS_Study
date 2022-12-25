@@ -70,6 +70,8 @@ public class GunController : MonoBehaviour
         currentGun.muzzleFlesh.Play();
 
         //총기 반동 코루틴 실행
+        StopAllCoroutines();
+        StartCoroutine(RetroActionCoroutine());
 
         Debug.Log("총알 발사함");
     }
@@ -186,7 +188,21 @@ public class GunController : MonoBehaviour
         }
         else
         {
+            currentGun.transform.localPosition = currentGun.fineSightOriginPos;
 
+            //반동 시작
+            while (currentGun.transform.localPosition.x <= currentGun.retroActionFineSightForce - 0.02f)
+            {
+                currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, retroActionRecoilBack, 0.4f);
+
+                yield return null;
+            }
+
+            // 원위치
+            while (currentGun.transform.localPosition != currentGun.fineSightOriginPos)
+            {
+                currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, currentGun.fineSightOriginPos, 0.1f);
+            }
         }
     }
 
