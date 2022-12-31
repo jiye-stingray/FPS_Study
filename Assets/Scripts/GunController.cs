@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
+    // 필요한 컴포넌트
+    [SerializeField] private Camera theCam;
+
     // 현재 장착된 총
     [SerializeField] private Gun currentGun;
 
@@ -14,17 +17,23 @@ public class GunController : MonoBehaviour
 
     // 상태 변수
     private bool isReload = false;
-    private bool isfineSightMode = false;       //정조준 상태 bool 변수
+    [HideInInspector] public bool isfineSightMode = false;       //정조준 상태 bool 변수
 
     //본래 포지션 값
-    private Vector3 originPos;    
-    
+    private Vector3 originPos;
+
     //효과음 재생
     private AudioSource audioSource;
 
-    // Start is called before the first frame update
+    // 레이저 충돌 정보 받아옴
+    private RaycastHit hitInfo;
+
+    // 피격 이펙트
+    [SerializeField] private GameObject hit_effect_prefab;
+
     void Start()
     {
+        originPos = Vector3.zero;
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -39,7 +48,7 @@ public class GunController : MonoBehaviour
     // 연사속도 재계산
     private void GunFireRateCalc()
     {
-        if(currentFireRate > 0)
+        if (currentFireRate > 0)
             currentFireRate -= Time.deltaTime;  //60분의 1 = 1
     }
 
@@ -75,14 +84,22 @@ public class GunController : MonoBehaviour
     {
         currentGun.currentBulletCount--;
         currentFireRate = currentGun.fireRate;      //연사 속도 재계산
-        PlaySE(currentGun.fire_Sound); 
+        PlaySE(currentGun.fire_Sound);
         currentGun.muzzleFlesh.Play();
-
+        Hit();
         //총기 반동 코루틴 실행
         StopAllCoroutines();
         StartCoroutine(RetroActionCoroutine());
 
-        Debug.Log("총알 발사함");
+    }
+
+    private void Hit()
+    {
+        if (Physics.Raycast(theCam.transform.position, theCam.transform.forward, out hitInfo, currentGun.range))
+        {
+            GameObject clone =  Instantiate(hit_effect_prefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+            Destroy(clone, 2f); 
+        }
     }
 
     // 재장전 시도
@@ -98,17 +115,17 @@ public class GunController : MonoBehaviour
     // 재장전
     IEnumerator ReloadCoroutine()
     {
-        if(currentGun.carryBulletCount > 0)
+        if (currentGun.carryBulletCount > 0)
         {
             isReload = true;
             currentGun.anim.SetTrigger("Reload");
 
-            currentGun.carryBulletCount +=  currentGun.currentBulletCount;
+            currentGun.carryBulletCount += currentGun.currentBulletCount;
             currentGun.currentBulletCount = 0;
 
             yield return new WaitForSeconds(currentGun.reloadTime);
 
-            if(currentGun.carryBulletCount >= currentGun.reloadBulletCount)
+            if (currentGun.carryBulletCount >= currentGun.reloadBulletCount)
             {
                 currentGun.currentBulletCount = currentGun.reloadBulletCount;
                 currentGun.carryBulletCount -= currentGun.reloadBulletCount;
@@ -116,7 +133,7 @@ public class GunController : MonoBehaviour
             else
             {
                 currentGun.currentBulletCount = currentGun.carryBulletCount;
-                currentGun.carryBulletCount = 0;    
+                currentGun.carryBulletCount = 0;
             }
 
             isReload = false;
@@ -148,7 +165,7 @@ public class GunController : MonoBehaviour
     {
         isfineSightMode = !isfineSightMode;
 
-        currentGun.anim.SetBool("FineSightMode",isfineSightMode);
+        currentGun.anim.SetBool("FineSightMode", isfineSightMode);
 
         if (isfineSightMode)
         {
@@ -170,7 +187,7 @@ public class GunController : MonoBehaviour
         // 따라서 위 코루틴을 실행할 때 다른 코루틴들을 종료 해줘야 한다.
         while (currentGun.transform.localPosition != currentGun.fineSightOriginPos)
         {
-            currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, currentGun.fineSightOriginPos,0.2f);
+            currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, currentGun.fineSightOriginPos, 0.2f);
             yield return null;
         }
     }
@@ -197,7 +214,7 @@ public class GunController : MonoBehaviour
             currentGun.transform.localPosition = originPos;
 
             //반동 시작
-            while (currentGun.transform.localPosition.x  <= currentGun.retroActionForce - 0.02f)
+            while (currentGun.transform.localPosition.x <= currentGun.retroActionForce - 0.02f)
             {
                 currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, recoilBack, 0.4f);
 
