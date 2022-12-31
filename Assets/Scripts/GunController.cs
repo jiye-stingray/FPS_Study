@@ -58,6 +58,7 @@ public class GunController : MonoBehaviour
         }
         else
         {
+            CancelFineSight();
             StartCoroutine(ReloadCoroutine());
         }
     }
@@ -80,6 +81,7 @@ public class GunController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R) && !isReload && currentGun.currentBulletCount < currentGun.reloadBulletCount)
         {
+            CancelFineSight();
             StartCoroutine(ReloadCoroutine());
         }
     }
@@ -117,10 +119,16 @@ public class GunController : MonoBehaviour
 
     private void TryFineSight()
     {
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2") && !isReload)
         {
             FineSight();
         }
+    }
+
+    public void CancelFineSight()
+    {
+        if (isfineSightMode)
+            FineSight();
     }
 
     private void FineSight()

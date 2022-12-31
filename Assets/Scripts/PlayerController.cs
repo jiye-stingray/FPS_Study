@@ -9,9 +9,10 @@ using UnityEngine.WSA;
 
 public class PlayerController : MonoBehaviour
 {
-
+    //필요한 컴포넌트
     private Rigidbody rigid;
-    private CapsuleCollider capsuleCollider;   
+    private CapsuleCollider capsuleCollider;
+    private GunController theGunController;
 
     //스피드 조정 변수
     [SerializeField] private float walkSpeed;
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
         rigid = GetComponent<Rigidbody>();
+        theGunController = FindObjectOfType<GunController>();
     }
 
     // Start is called before the first frame update
@@ -106,6 +108,8 @@ public class PlayerController : MonoBehaviour
         //앉은 상태에서 점프 시 해제
         if (isCrouch)
             Crouch();
+
+        theGunController.CancelFineSight();
 
         isRun = true;
         applySpeed = runSpeed;
