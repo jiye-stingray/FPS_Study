@@ -24,9 +24,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce; 
 
     // 상태 변수
+    private bool isWalk = false;
     private bool isRun = false;
     private bool isGround = true;
     private bool isCrouch = false;
+
+    // 움직임 체크 변수
+    private Vector3 lastPos;
 
     //앉았을 때 얼마나 앉았을지 결정하는 변수
     [SerializeField] private float crouchPosY;
@@ -65,6 +69,7 @@ public class PlayerController : MonoBehaviour
         TryRun();
         TryCrouch();
         Move();
+        MoveCheck();
         CameraRotation();
         CharacterRotation();
 
@@ -195,6 +200,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void MoveCheck()
+    {
+        lastPos = transform.position;
+    }
 
     private void CameraRotation()
     {
