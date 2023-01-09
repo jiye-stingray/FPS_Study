@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rigid;
     private CapsuleCollider capsuleCollider;
     private GunController theGunController;
+    private Crosshair theCrosshair;
 
     //스피드 조정 변수
     [SerializeField] private float walkSpeed;
@@ -202,7 +203,17 @@ public class PlayerController : MonoBehaviour
 
     private void MoveCheck()
     {
-        lastPos = transform.position;
+        if (!isRun)
+        {
+            if (Vector3.Distance(lastPos, transform.position) >= 0.01f)
+                isWalk = true;
+            else
+                isWalk = false;
+
+            lastPos = transform.position;
+        }
+
+
     }
 
     private void CameraRotation()

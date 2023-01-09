@@ -14,9 +14,19 @@ public class Crosshair : MonoBehaviour
     [SerializeField] private GameObject go_crosshairHUD;
 
 
-    // Update is called once per frame
-    void Update()
+    public void WalkingAnimation(bool _flag)
     {
-        
+        animator.SetBool("Walking", _flag);
+    }
+
+    public void RunningAnimation(bool _flag)
+    {
+        animator.SetBool("Running", _flag);
+    }
+
+    public void CrouchingAnimation(bool _flag)
+    {
+        animator.SetBool("Crouching", _flag);
     }
 }
+
