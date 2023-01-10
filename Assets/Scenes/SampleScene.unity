@@ -11906,6 +11906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 232143036}
   go_crosshairHUD: {fileID: 232143034}
+  theGunController: {fileID: 2059869453}
 --- !u!1 &1915953300
 GameObject:
   m_ObjectHideFlags: 0

@@ -84,7 +84,6 @@ public class GunController : MonoBehaviour
     // 발사 후 계산
     private void Shoot()
     {
-        Debug.Log("Shoot");
 
         theCrosshair.FireAnimation();
         currentGun.currentBulletCount--;
@@ -100,7 +99,11 @@ public class GunController : MonoBehaviour
 
     private void Hit()
     {
-        if (Physics.Raycast(theCam.transform.position, theCam.transform.forward, out hitInfo, currentGun.range))
+        if (Physics.Raycast(theCam.transform.position, theCam.transform.forward + 
+            new Vector3(Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
+                        Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
+                        0),
+            out hitInfo, currentGun.range))
         {
             GameObject clone =  Instantiate(hit_effect_prefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
             Destroy(clone, 2f); 
@@ -262,5 +265,10 @@ public class GunController : MonoBehaviour
     public Gun GetGun()
     {
         return currentGun;
+    }
+
+    public bool GetFineSightMode()
+    {
+        return isfineSightMode;
     }
 }
