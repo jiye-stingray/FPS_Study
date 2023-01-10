@@ -8,6 +8,7 @@ public class GunController : MonoBehaviour
 {
     // 필요한 컴포넌트
     [SerializeField] private Camera theCam;
+    private Crosshair theCrosshair;
 
     // 현재 장착된 총
     [SerializeField] private Gun currentGun;
@@ -35,6 +36,7 @@ public class GunController : MonoBehaviour
     {
         originPos = Vector3.zero;
         audioSource = GetComponent<AudioSource>();
+        theCrosshair = FindObjectOfType<Crosshair>();
     }
 
     void Update()
@@ -82,6 +84,9 @@ public class GunController : MonoBehaviour
     // 발사 후 계산
     private void Shoot()
     {
+        Debug.Log("Shoot");
+
+        theCrosshair.FireAnimation();
         currentGun.currentBulletCount--;
         currentFireRate = currentGun.fireRate;      //연사 속도 재계산
         PlaySE(currentGun.fire_Sound);

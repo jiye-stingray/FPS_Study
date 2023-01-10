@@ -28,5 +28,19 @@ public class Crosshair : MonoBehaviour
     {
         animator.SetBool("crouching", _flag);
     }
+
+    public void FireAnimation()
+    {
+        if (animator.GetBool("walking"))
+            animator.SetTrigger("walk_fire");
+        else if (animator.GetBool("crouching"))
+            animator.SetTrigger("crouch_fire");
+        else
+        {
+            animator.SetTrigger("idle_fire");
+        }
+
+    }
 }
 
+ 
