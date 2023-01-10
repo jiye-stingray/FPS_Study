@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour
     private float currentCameraRotationX = 0;
     [SerializeField] private Camera _camera;
 
+    Vector3 _velocityVec = Vector3.zero;        //움직임 속도 변수
+
     private void Awake()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
@@ -202,7 +204,7 @@ public class PlayerController : MonoBehaviour
         Vector3 _moveH = transform.right * _h;
         Vector3 _moveV = transform.forward * _v;
 
-        Vector3 _velocityVec = (_moveH + _moveV).normalized * applySpeed;
+        _velocityVec = (_moveH + _moveV).normalized * applySpeed;
 
         rigid.MovePosition(transform.position + _velocityVec * Time.deltaTime);
 
@@ -212,9 +214,12 @@ public class PlayerController : MonoBehaviour
     {
         if (!isRun && !isCrouch)
         {
-            if (Vector3.Distance(lastPos, transform.position) >= 0.01f)
+            if (_velocityVec.magnitude >= 0.01f)
+
                 isWalk = true;
+
             else
+
                 isWalk = false;
 
             theCrosshair.WalkingAnimation(isWalk);
