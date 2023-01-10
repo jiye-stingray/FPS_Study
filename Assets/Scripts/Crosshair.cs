@@ -16,17 +16,17 @@ public class Crosshair : MonoBehaviour
 
     public void WalkingAnimation(bool _flag)
     {
-        animator.SetBool("Walking", _flag);
+        animator.SetBool("walking", _flag);
     }
 
     public void RunningAnimation(bool _flag)
     {
-        animator.SetBool("Running", _flag);
+        animator.SetBool("running", _flag);
     }
 
     public void CrouchingAnimation(bool _flag)
     {
-        animator.SetBool("Crouching", _flag);
+        animator.SetBool("crouching", _flag);
     }
 }
 

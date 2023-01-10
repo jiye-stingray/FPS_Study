@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider>();
         rigid = GetComponent<Rigidbody>();
         theGunController = FindObjectOfType<GunController>();
+        theCrosshair = FindObjectOfType<Crosshair>();
     }
 
     // Start is called before the first frame update
@@ -118,12 +119,17 @@ public class PlayerController : MonoBehaviour
         theGunController.CancelFineSight();
 
         isRun = true;
+        theCrosshair.RunningAnimation(isRun);
         applySpeed = runSpeed;
     }
 
+    /// <summary>
+    /// 달리기 취소
+    /// </summary>
     private void RunningCancel()
     {
         isRun = false;
+        theCrosshair.RunningAnimation(isRun);
         applySpeed = walkSpeed;
     }
 
@@ -144,6 +150,7 @@ public class PlayerController : MonoBehaviour
     private void Crouch()
     {
         isCrouch = !isCrouch;
+        theCrosshair.CrouchingAnimation(isCrouch);
 
         if (isCrouch)
         {
@@ -203,13 +210,14 @@ public class PlayerController : MonoBehaviour
 
     private void MoveCheck()
     {
-        if (!isRun)
+        if (!isRun && !isCrouch)
         {
             if (Vector3.Distance(lastPos, transform.position) >= 0.01f)
                 isWalk = true;
             else
                 isWalk = false;
 
+            theCrosshair.WalkingAnimation(isWalk);
             lastPos = transform.position;
         }
 
