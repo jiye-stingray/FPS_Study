@@ -45,11 +45,11 @@ public class Crosshair : MonoBehaviour
         if (animator.GetBool("walking"))
             gunAccuracy = 0.06f;
         else if (animator.GetBool("crouching"))
-            gunAccuracy = 0.02f;
+            gunAccuracy = 0.015f;
         else if (theGunController.GetFineSightMode())
             gunAccuracy = 0.001f;
         else
-            gunAccuracy = 0.04f;
+            gunAccuracy = 0.035f;
 
         return gunAccuracy;
     }
