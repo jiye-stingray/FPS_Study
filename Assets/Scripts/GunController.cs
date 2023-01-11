@@ -172,8 +172,9 @@ public class GunController : MonoBehaviour
     private void FineSight()
     {
         isfineSightMode = !isfineSightMode;
-
         currentGun.anim.SetBool("FineSightMode", isfineSightMode);
+        theCrosshair.FineSightAnimation(isfineSightMode);
+
 
         if (isfineSightMode)
         {

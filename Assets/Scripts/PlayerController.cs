@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour
     private void IsGround()
     {
         isGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f);
+        theCrosshair.RunningAnimation(!isGround);
     }
 
     private void TryJump()
@@ -212,7 +213,7 @@ public class PlayerController : MonoBehaviour
 
     private void MoveCheck()
     {
-        if (!isRun && !isCrouch)
+        if (!isRun && !isCrouch && isGround)
         {
             if (_velocityVec.magnitude >= 0.01f)
 

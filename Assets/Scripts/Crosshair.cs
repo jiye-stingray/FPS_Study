@@ -29,6 +29,11 @@ public class Crosshair : MonoBehaviour
         animator.SetBool("crouching", _flag);
     }
 
+    public void FineSightAnimation(bool _flag)
+    {
+        animator.SetBool("fineSight", _flag);
+    }
+
     public void FireAnimation()
     {
         if (animator.GetBool("walking"))
