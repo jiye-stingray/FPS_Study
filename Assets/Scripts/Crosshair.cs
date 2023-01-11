@@ -43,7 +43,7 @@ public class Crosshair : MonoBehaviour
     public float GetAccuracy()
     {
         if (animator.GetBool("walking"))
-            gunAccuracy = 0.08f;
+            gunAccuracy = 0.06f;
         else if (animator.GetBool("crouching"))
             gunAccuracy = 0.02f;
         else if (theGunController.GetFineSightMode())
