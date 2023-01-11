@@ -822,8 +822,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunName: SubMachinGun1
   range: 100
-  accuracy: 0
-  fireRate: 0.2
+  accuracy: 0.01
+  fireRate: 0.1
   reloadTime: 2
   damage: 30
   reloadBulletCount: 10
@@ -832,7 +832,7 @@ MonoBehaviour:
   carryBulletCount: 23
   retroActionForce: 0.3
   retroActionFineSightForce: 0.7
-  fineSightOriginPos: {x: 0.55, y: 0.335, z: -0.557}
+  fineSightOriginPos: {x: 0.55, y: 0.335, z: -0.58}
   anim: {fileID: 634754227}
   muzzleFlesh: {fileID: 1141195016}
   fire_Sound: {fileID: 8300000, guid: bc74e5bd1ff19c947a35cecf8b4c4c34, type: 3}
