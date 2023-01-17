@@ -120,6 +120,17 @@ public class GunController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 재장전 취소
+    /// </summary>
+    public void CancelReload()
+    {
+        if(!isReload) { 
+            StopAllCoroutines();
+            isReload = false;
+        }
+    }
+
     // 재장전
     IEnumerator ReloadCoroutine()
     {
