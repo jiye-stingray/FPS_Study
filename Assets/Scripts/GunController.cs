@@ -99,14 +99,14 @@ public class GunController : MonoBehaviour
 
     private void Hit()
     {
-        if (Physics.Raycast(theCam.transform.position, theCam.transform.forward + 
+        if (Physics.Raycast(theCam.transform.position, theCam.transform.forward +
             new Vector3(Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
                         Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
                         0),
             out hitInfo, currentGun.range))
         {
-            GameObject clone =  Instantiate(hit_effect_prefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
-            Destroy(clone, 2f); 
+            GameObject clone = Instantiate(hit_effect_prefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+            Destroy(clone, 2f);
         }
     }
 
@@ -125,7 +125,8 @@ public class GunController : MonoBehaviour
     /// </summary>
     public void CancelReload()
     {
-        if(!isReload) { 
+        if (!isReload)
+        {
             StopAllCoroutines();
             isReload = false;
         }
@@ -282,5 +283,18 @@ public class GunController : MonoBehaviour
     public bool GetFineSightMode()
     {
         return isfineSightMode;
+    }
+
+    public void GunChange(Gun _gun)
+    {
+        if (WeaponManager.currentWeapon != null)
+            WeaponManager.currentWeapon.gameObject.SetActive(false);
+
+        currentGun = _gun;
+        WeaponManager.currentWeapon = currentGun.GetComponent<Transform>();
+        WeaponManager.currentWeaponAnim = currentGun.anim;
+
+        currentGun.transform.localPosition = Vector3.zero;
+        currentGun.gameObject.SetActive(true);
     }
 }
