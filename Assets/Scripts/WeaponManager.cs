@@ -89,8 +89,10 @@ public class WeaponManager : MonoBehaviour
             case "GUN":
                 theGunController.CancelFineSight();
                 theGunController.CancelReload();
+                GunController.isActivate = false;
                 break;
             case "HAND":
+                HandController.isActivate = false;  
                 break;
         }
         

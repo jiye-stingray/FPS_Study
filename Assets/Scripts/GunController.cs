@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
+    // 활성화 여부
+    public static bool isActivate = true;
+
     // 필요한 컴포넌트
     [SerializeField] private Camera theCam;
     private Crosshair theCrosshair;
@@ -44,10 +47,14 @@ public class GunController : MonoBehaviour
 
     void Update()
     {
-        GunFireRateCalc();
-        TryFire();
-        TryReload();
-        TryFineSight();
+        if(isActivate)
+        {
+            GunFireRateCalc();
+            TryFire();
+            TryReload();
+            TryFineSight();
+        }
+
     }
 
     // 연사속도 재계산
@@ -299,5 +306,7 @@ public class GunController : MonoBehaviour
 
         currentGun.transform.localPosition = Vector3.zero;
         currentGun.gameObject.SetActive(true);
+
+        isActivate = true;
     }
 }

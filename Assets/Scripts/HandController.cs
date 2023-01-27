@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class HandController : MonoBehaviour
 {
+    // 활성화 여부
+    public static bool isActivate = false; 
+
     [SerializeField] private Hand currentHand;      //현재 장착된 Hand형 타입 무기
 
     //공격중??
@@ -16,7 +19,8 @@ public class HandController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TryAttack();
+        if(isActivate)
+            TryAttack();
     }
 
     void TryAttack()
