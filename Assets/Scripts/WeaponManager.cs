@@ -44,7 +44,7 @@ public class WeaponManager : MonoBehaviour
         }
         for (int i = 0; i < hands.Length; i++)
         {
-            handDictionary.Add(hands[i].handName, hands[i]);
+            handDictionary.Add(hands[i].closeWeaponName, hands[i]);
         }
     }
 

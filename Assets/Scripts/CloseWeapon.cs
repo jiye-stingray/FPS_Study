@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class CloseWeapon : MonoBehaviour
 {
-    public string handName;     //너클이나 맨손 구분
+    public string closeWeaponName;     // 근접 무기 이름
+
+    // Weapon 유형
+    public bool isHand;
+    public bool isAxe;
+    public bool isPockaxe;
+
     public float range;         //공격범위
     public int damage;          //공격력
     public float workSpeed;     //작업 속도
