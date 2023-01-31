@@ -9,7 +9,7 @@ public abstract class CloseWeaponController : MonoBehaviour
     public static bool isActivate = false;
 
     // 현재 장착된 Hand형 타입 무기
-    [SerializeField] protected CloseWeapon currentHand;
+    [SerializeField] protected CloseWeapon currentCloseWeapon;
 
     // 공격중 ??
     protected bool isAttack = false;
@@ -33,17 +33,17 @@ public abstract class CloseWeaponController : MonoBehaviour
     protected IEnumerator AttackCoroutine()
     {
         isAttack = true;
-        currentHand.anim.SetTrigger("Attack");
+        currentCloseWeapon.anim.SetTrigger("Attack");
 
-        yield return new WaitForSeconds(currentHand.attackDelayA);
+        yield return new WaitForSeconds(currentCloseWeapon.attackDelayA);
         isSwing = true;
 
         StartCoroutine(HitCoroutine());
 
-        yield return new WaitForSeconds(currentHand.attackDelayB);
+        yield return new WaitForSeconds(currentCloseWeapon.attackDelayB);
         isSwing = false;
 
-        yield return new WaitForSeconds(currentHand.attackDelay - currentHand.attackDelayA - currentHand.attackDelayB);
+        yield return new WaitForSeconds(currentCloseWeapon.attackDelay - currentCloseWeapon.attackDelayA - currentCloseWeapon.attackDelayB);
         isSwing = false;
 
     }
@@ -54,7 +54,7 @@ public abstract class CloseWeaponController : MonoBehaviour
 
     protected bool CheckObject()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, currentHand.range))
+        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, currentCloseWeapon.range))
         {
             return true;
         }
@@ -62,17 +62,17 @@ public abstract class CloseWeaponController : MonoBehaviour
 
     }
 
-    public void HandChange(CloseWeapon _hand)
+    public void CloseWeaponChange(CloseWeapon _closeWeapon)
     {
         if (WeaponManager.currentWeapon != null)
             WeaponManager.currentWeapon.gameObject.SetActive(false);
 
-        currentHand = _hand;
-        WeaponManager.currentWeapon = currentHand.GetComponent<Transform>();
-        WeaponManager.currentWeaponAnim = currentHand.anim;
+        currentCloseWeapon = _closeWeapon;
+        WeaponManager.currentWeapon = currentCloseWeapon.GetComponent<Transform>();
+        WeaponManager.currentWeaponAnim = currentCloseWeapon.anim;
 
-        currentHand.transform.localPosition = UnityEngine.Vector3.zero;
-        currentHand.gameObject.SetActive(true);
+        currentCloseWeapon.transform.localPosition = UnityEngine.Vector3.zero;
+        currentCloseWeapon.gameObject.SetActive(true);
         isActivate = true;
 
 
