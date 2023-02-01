@@ -5,8 +5,6 @@ using UnityEngine;
 public abstract class CloseWeaponController : MonoBehaviour
 {       // 미완성 클래스 = 추상 클래스
 
-    // 활성화 여부
-    public static bool isActivate = false;
 
     // 현재 장착된 Hand형 타입 무기
     [SerializeField] protected CloseWeapon currentCloseWeapon;
@@ -62,7 +60,11 @@ public abstract class CloseWeaponController : MonoBehaviour
 
     }
 
-    public void CloseWeaponChange(CloseWeapon _closeWeapon)
+    /// <summary>
+    /// 완성 함수이지만, 추가 편집한 함수
+    /// </summary>
+    /// <param name="_closeWeapon"></param>
+    public virtual void CloseWeaponChange(CloseWeapon _closeWeapon)
     {
         if (WeaponManager.currentWeapon != null)
             WeaponManager.currentWeapon.gameObject.SetActive(false);
@@ -73,7 +75,6 @@ public abstract class CloseWeaponController : MonoBehaviour
 
         currentCloseWeapon.transform.localPosition = UnityEngine.Vector3.zero;
         currentCloseWeapon.gameObject.SetActive(true);
-        isActivate = true;
 
 
     }
