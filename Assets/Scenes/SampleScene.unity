@@ -12498,7 +12498,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7588230462318095406}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UpArm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12516,7 +12516,7 @@ GameObject:
   - component: {fileID: 72635319317180670}
   - component: {fileID: 741367553808165446}
   - component: {fileID: 741367553808165445}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12581,7 +12581,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3851611094186535835}
   - component: {fileID: 8239561478212768395}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12629,7 +12629,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9015043187114998575}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DownArm.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12661,7 +12661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7931012640219057077}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DownArm.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12677,7 +12677,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2513296376371183830}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DownArm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12709,7 +12709,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7856603535033802249}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Axe_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12725,7 +12725,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 546314081137284152}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DownArm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12803,7 +12803,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7151132289994705867}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UpArm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12820,7 +12820,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2957924794442780675}
   - component: {fileID: 5269031609777966877}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: arms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13010,7 +13010,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9057539444636639328}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13165,7 +13165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9204000736085631545}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
