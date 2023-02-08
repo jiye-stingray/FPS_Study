@@ -44,6 +44,8 @@ public abstract class CloseWeaponController : MonoBehaviour
         yield return new WaitForSeconds(currentCloseWeapon.attackDelay - currentCloseWeapon.attackDelayA - currentCloseWeapon.attackDelayB);
         isSwing = false;
 
+        isAttack= false;
+
     }
 
     // 미완성 = 추상 코루틴

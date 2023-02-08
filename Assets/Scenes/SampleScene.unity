@@ -12218,6 +12218,7 @@ GameObject:
   - component: {fileID: 2059869452}
   - component: {fileID: 2059869453}
   - component: {fileID: 2059869457}
+  - component: {fileID: 2059869458}
   - component: {fileID: 2059869454}
   - component: {fileID: 2059869455}
   - component: {fileID: 2059869456}
@@ -12393,11 +12394,12 @@ MonoBehaviour:
   - {fileID: 8775207664039368096}
   axes:
   - {fileID: 741367553808165445}
-  pickaxes: []
+  pickaxes:
+  - {fileID: 7589051568990036244}
   theGunController: {fileID: 2059869453}
   theHandController: {fileID: 2059869452}
   theAxeController: {fileID: 2059869457}
-  thePickaxeController: {fileID: 0}
+  thePickaxeController: {fileID: 2059869458}
 --- !u!114 &2059869456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12427,6 +12429,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCloseWeapon: {fileID: 741367553808165445}
+--- !u!114 &2059869458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059869450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69814ef8b9afe634c90d67cba2a8fffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentCloseWeapon: {fileID: 7589051568990036244}
 --- !u!1 &19892878094161103
 GameObject:
   m_ObjectHideFlags: 0
@@ -13467,7 +13482,7 @@ Animator:
   m_GameObject: {fileID: 7069079788148095913}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 8e6aff9797756dc4eafc2922560d000b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
