@@ -12452,7 +12452,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3354184942458538541}
   - component: {fileID: 7814384139691122702}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Nob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12759,7 +12759,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1576663817451893133}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13041,7 +13041,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1265228906891897109}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PickAxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13140,7 +13140,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 823696577477237286}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UpArm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13278,7 +13278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4710518560539836910}
   - component: {fileID: 2399551174808657648}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: arms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13310,7 +13310,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 80352477757390275}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UpArm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13328,7 +13328,7 @@ GameObject:
   - component: {fileID: 7589051568990036243}
   - component: {fileID: 7589051568990036245}
   - component: {fileID: 7589051568990036244}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pickaxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13408,7 +13408,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1533591407237982914}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DownArm.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13623,7 +13623,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8054497179092567509}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DownArm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13639,7 +13639,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5770315911586431753}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PickAxe_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13764,7 +13764,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 451251359453960792}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DownArm.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13780,7 +13780,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5382561302766424379}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DownArm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
