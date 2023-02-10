@@ -17,7 +17,7 @@ public class Rock : MonoBehaviour
     [SerializeField] private GameObject go_debris;  // ±úÁø ¹ÙÀ§
 
 
-    private void Mining()
+    public void Mining()
     {
         hp--;
         if (hp <= 0)
