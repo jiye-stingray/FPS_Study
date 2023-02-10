@@ -511,6 +511,7 @@ GameObject:
   m_Component:
   - component: {fileID: 240506045}
   - component: {fileID: 240506046}
+  - component: {fileID: 240506047}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Rock
@@ -548,6 +549,23 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0.1, z: 0}
+--- !u!114 &240506047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240506044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7e9efd70b191cd458b2479649c8ff81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1
+  destroyTime: 5
+  col: {fileID: 240506046}
+  go_rock: {fileID: 858790551}
+  go_debris: {fileID: 839443375}
 --- !u!1 &250222407
 GameObject:
   m_ObjectHideFlags: 0
@@ -1540,6 +1558,16 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 834927340}
   m_CullTransparentMesh: 1
+--- !u!1 &839443375 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: eca0e876cefebf046b4d92069f67efcf, type: 3}
+  m_PrefabInstance: {fileID: 1904580296}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &858790551 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b122de828ace6004e825c3cb13e751cd, type: 3}
+  m_PrefabInstance: {fileID: 993341950}
+  m_PrefabAsset: {fileID: 0}
 --- !u!54 &911304767
 Rigidbody:
   m_ObjectHideFlags: 0
