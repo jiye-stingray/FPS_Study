@@ -566,6 +566,7 @@ MonoBehaviour:
   col: {fileID: 240506046}
   go_rock: {fileID: 858790551}
   go_debris: {fileID: 839443375}
+  go_effect_prefabs: {fileID: 490845752242756897, guid: b6b78294ffbbd4a458044915acc70b07, type: 3}
 --- !u!1 &250222407
 GameObject:
   m_ObjectHideFlags: 0

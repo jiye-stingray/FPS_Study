@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,18 +16,22 @@ public class Rock : MonoBehaviour
     // 필요한 게임 오브젝트
     [SerializeField] private GameObject go_rock;    // 일반 바위
     [SerializeField] private GameObject go_debris;  // 깨진 바위
-
+    [SerializeField] private GameObject go_effect_prefabs;  // 채굴 이펙트
 
     public void Mining()
     {
+        var clone = Instantiate(go_effect_prefabs, col.bounds.center, Quaternion.identity);
+        Destroy(clone, destroyTime);
+
         hp--;
+
         if (hp <= 0)
             Destruction();
-    } 
+    }
 
     private void Destruction()
     {
-        col.enabled= false;
+        col.enabled = false;
         Destroy(go_rock);
 
         go_debris.SetActive(true);
