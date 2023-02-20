@@ -34,6 +34,11 @@ public class SoundManager : MonoBehaviour
     public Sound[] effectSounds;
     public Sound[] bgmSounds;
 
+    private void Start()
+    {
+        playSoundName = new string[6];
+    }
+
     public void PlaySE(string _name)
     {
         for (int i = 0; i < effectSounds.Length; i++)
@@ -47,9 +52,6 @@ public class SoundManager : MonoBehaviour
                         playSoundName[j] = effectSounds[i].name;
                         audioSourcesEffects[j].clip = effectSounds[i].clip;
                         audioSourcesEffects[j].Play();
-
-                        Debug.Log("소리 들림");
-
                         return;
                     }
                 }
