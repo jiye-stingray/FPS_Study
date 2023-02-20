@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
@@ -41,11 +42,14 @@ public class SoundManager : MonoBehaviour
             {
                 for (int j = 0; j < audioSourcesEffects.Length; j++)
                 {
-                    if (audioSourcesEffects[j].isPlaying)
+                    if (!audioSourcesEffects[j].isPlaying)
                     {
                         playSoundName[j] = effectSounds[i].name;
                         audioSourcesEffects[j].clip = effectSounds[i].clip;
                         audioSourcesEffects[j].Play();
+
+                        Debug.Log("소리 들림");
+
                         return;
                     }
                 }

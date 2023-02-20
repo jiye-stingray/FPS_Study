@@ -6609,7 +6609,7 @@ MonoBehaviour:
   - 
   - 
   effectSounds:
-  - name: PickAxe_Strike
+  - name: Pickaxe_Strike
     clip: {fileID: 8300000, guid: 3fa40a5febbd5bd46ab232476847beb1, type: 3}
   - name: Rock_Destroy
     clip: {fileID: 8300000, guid: fe668f91dded5c446bff01a76133f86a, type: 3}
@@ -14134,6 +14134,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7951327999177653865, guid: f29da092fd7e0bb4592a0945221708bb, type: 3}
+      propertyPath: hp
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7951327999177653866, guid: f29da092fd7e0bb4592a0945221708bb, type: 3}
       propertyPath: m_Name
       value: Rock
