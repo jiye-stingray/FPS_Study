@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using UnityEditor.Timeline;
 using UnityEngine;
 
 public class Twig : MonoBehaviour
@@ -11,7 +12,7 @@ public class Twig : MonoBehaviour
     [SerializeField] private float destroyTime;     //이펙트 삭제 시간
 
     // 회전값 변수
-    private Vector3 orginRot;
+    private Vector3 originRot;
     private Vector3 wantedRot;
     private Vector3 currentRot;
 
@@ -21,8 +22,8 @@ public class Twig : MonoBehaviour
 
     void Start()
     {
-        orginRot = transform.rotation.eulerAngles;
-        currentRot = orginRot;
+        originRot = transform.rotation.eulerAngles;
+        currentRot = originRot;
     }
 
     public void Damage(Transform _playerTf)
@@ -59,11 +60,53 @@ public class Twig : MonoBehaviour
 
         CheckDirection(rotationDir);
 
-        yield return null;  
+        while (!CheckThreshold())
+        {
+            currentRot = Vector3.Lerp(currentRot, wantedRot, 0.25f);
+            transform.rotation = Quaternion.Euler(currentRot);
+            yield return null;  
+        }
+
+        wantedRot = originRot;
+
+        while (!CheckThreshold())
+        {
+            currentRot = Vector3.Lerp(currentRot, wantedRot, 0.15f);
+            transform.rotation = Quaternion.Euler(currentRot);
+            yield return null;
+        }
+
     }
+
+    private bool CheckThreshold()
+    {
+        if (Mathf.Abs(wantedRot.x - currentRot.x) <= 0.5f && Mathf.Abs(wantedRot.z - currentRot.z) <= 0.5f)
+            return true;
+        return false;
+    }
+
 
     private void CheckDirection(Vector3 _rotationDir)
     {
         Debug.Log(_rotationDir);
+
+        if(_rotationDir.y > 180)
+        {
+            if (_rotationDir.y > 300)
+                wantedRot = new Vector3(-50f,0f,-50f) ;
+            else if (_rotationDir.y > 240)
+                wantedRot = new Vector3(0f, 0f, -50f);
+            else
+                wantedRot = new Vector3(50f, 0f, -50f);
+        }
+        else if (_rotationDir.y <= 180)
+        {
+            if (_rotationDir.y < 60)
+                wantedRot = new Vector3(-50f, 0f, -50f);
+            else if (_rotationDir.y > 120)
+                wantedRot = new Vector3(0f, 0f, 50f);
+            else
+                wantedRot = new Vector3(50f, 0f, 50f);
+        }
     }
 }
