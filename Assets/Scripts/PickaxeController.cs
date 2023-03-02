@@ -29,7 +29,12 @@ public class PickaxeController : CloseWeaponController
                 {
                     hitInfo.transform.GetComponent<Rock>().Mining();
                 }
-                    isSwing = false;
+                else if (hitInfo.transform.tag == "Twig")
+                {
+                    hitInfo.transform.GetComponent<Twig>().Damage(this.transform);
+
+                }
+                isSwing = false;
                 Debug.Log(hitInfo.transform.name);
             }
             yield return null;
